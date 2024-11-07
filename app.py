@@ -2,15 +2,45 @@ import fastapi
 
 app = fastapi.FastAPI()
 
-@app.get("/", response_class=fastapi.responses.HTMLResponse)
-async def main():
-    return """
-    <html>
-        <head>
-            <title>Test</title>
-        </head>
-        <body>
-            <h1>Hello world!</h1>
-        </body>
-    </html>
-    """
+class Account:
+    def set(self, name: str, pwd: str, new_name: str = None, new_pwd: str = None, user_id: str = None):
+        self.name = name
+        self.pwd = pwd
+        self.new_name = new_name
+        self.new_pwd = new_pwd
+        self.user_id = user_id
+
+    async def create(self):
+        return
+
+    async def delete(self):
+        return
+
+    async def edit(self):
+        return
+
+    async def get(self):
+        return
+
+class Message:
+    def set(self, user_token: str, msg: str = None, msg_id: str = None, new_msg: str = None):
+        self.user_token = user_token
+        self.msg = msg
+        self.msg_id = msg_id
+        self.new_msg = new_name
+
+    async def create(self):
+        return
+
+    async def delete(self):
+        return
+
+    async def edit(self):
+        return
+
+    async def get(self):
+        return
+
+@app.post("/api/account/create")
+async def main(name: str, pwd: str):
+    
