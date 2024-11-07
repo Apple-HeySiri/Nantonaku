@@ -3,11 +3,12 @@ import fastapi
 app = fastapi.FastAPI()
 
 class Account:
-    def set(self, name: str, pwd: str, new_name: str = None, new_pwd: str = None, user_id: str = None):
+    def set(self, name: str, pwd: str, new_name: str = None, new_pwd: str = None, user_token: str = None, user_id: str = None):
         self.name = name
         self.pwd = pwd
         self.new_name = new_name
         self.new_pwd = new_pwd
+        self.user_token = user_token
         self.user_id = user_id
 
     async def create(self):
@@ -43,4 +44,20 @@ class Message:
 
 @app.post("/api/account/create")
 async def main(name: str, pwd: str):
-    
+    return
+
+@app.post("/api/account/delete")
+async def main(name: str, pwd: str):
+    return
+
+@app.post("/api/account/edit/name")
+async def main(name: str, pwd: str, new_name: str):
+    return
+
+@app.post("/api/account/edit/pwd")
+async def main(name: str, pwd: str, new_pwd: str):
+    return
+
+@app.post("/api/account/get")
+async def main(user_token: str, user_id: str):
+    return
