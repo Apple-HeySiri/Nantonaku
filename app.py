@@ -1,7 +1,7 @@
-import flask
+import fastapi
 
-app = flask.Flask(__name__)
+app = fastapi.FastAPI()
 
-@app.route("/", methods=["GET"])
-def main():
-  return "a"
+@app.get("/")
+def read_root():
+    return "Hello"
