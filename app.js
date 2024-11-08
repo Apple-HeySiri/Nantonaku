@@ -1,6 +1,8 @@
 import { Hono } from 'hono';
+import express from 'express';
 
 const app = new Hono();
+const server = express();
 
 //--------------------Account--------------------//
 
@@ -114,4 +116,14 @@ app.post('/api/message/get', async (c) => {
   return c.json({ message: 'Message details fetched' });
 });
 
-app.fire();
+//--------------------Server--------------------//
+
+server.use(express.json());
+
+server.all('*', (req, res) => {
+  app.request(req, res);
+});
+
+server.listen(3000, () => {
+  console.log('Server is running on http://localhost:3000');
+});
