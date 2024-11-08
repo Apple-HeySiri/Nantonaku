@@ -120,10 +120,8 @@ app.post('/api/message/get', async (c) => {
 
 server.use(express.json());
 
-server.all('*', (req, res) => {
-  app.request(req, res);
+server.use((req, res) => {
+  return app.handle(req, res);
 });
 
-server.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000');
-});
+server.listen(3000);
