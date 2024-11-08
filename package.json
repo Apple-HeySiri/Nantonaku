@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "hono": "^3.0.0"
+  }
+}
