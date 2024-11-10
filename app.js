@@ -4,6 +4,12 @@ import express from 'express';
 const app = new Hono();
 const server = express();
 
+//--------------------Web--------------------//
+
+app.post('/', async (c) => {
+  return c.text('Hello');
+});
+
 //--------------------Account--------------------//
 
 class Account {
