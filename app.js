@@ -120,6 +120,6 @@ app.post('/api/message/get', async (c) => {
   return c.json({ message: 'Message details fetched' });
 });
 
-//--------------------App--------------------//
+//--------------------Server--------------------//
 
-app.fire();
+app.listen(3000);
