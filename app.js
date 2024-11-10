@@ -121,7 +121,7 @@ app.post('/api/message/get', async (c) => {
 server.use(express.json());
 
 server.use((req, res) => {
-  return app.handle(req, res);
+  return app.fetch(req, res);
 });
 
 server.listen(3000);
