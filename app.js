@@ -1,11 +1,11 @@
-import { Hono } from 'hono';
-
-const app = new Hono();
+const express = require('express');
+const app = express();
+app.use(express.json());
 
 //--------------------Web--------------------//
 
-app.post('/', async (c) => {
-  return c.text('Hello');
+app.post('/', (req, res) => {
+  res.send('Hello');
 });
 
 //--------------------Account--------------------//
@@ -33,39 +33,39 @@ class Account {
   }
 }
 
-app.post('/api/account/create', async (c) => {
-  const { name, pwd } = await c.req.json();
+app.post('/api/account/create', async (req, res) => {
+  const { name, pwd } = req.body;
   const account = new Account(name, pwd);
   await account.create();
-  return c.json({ message: 'Account created' });
+  res.json({ message: 'Account created' });
 });
 
-app.post('/api/account/delete', async (c) => {
-  const { name, pwd } = await c.req.json();
+app.post('/api/account/delete', async (req, res) => {
+  const { name, pwd } = req.body;
   const account = new Account(name, pwd);
   await account.delete();
-  return c.json({ message: 'Account deleted' });
+  res.json({ message: 'Account deleted' });
 });
 
-app.post('/api/account/edit/name', async (c) => {
-  const { name, pwd, new_name } = await c.req.json();
+app.post('/api/account/edit/name', async (req, res) => {
+  const { name, pwd, new_name } = req.body;
   const account = new Account(name, pwd, new_name);
   await account.edit();
-  return c.json({ message: 'Account name updated' });
+  res.json({ message: 'Account name updated' });
 });
 
-app.post('/api/account/edit/pwd', async (c) => {
-  const { name, pwd, new_pwd } = await c.req.json();
+app.post('/api/account/edit/pwd', async (req, res) => {
+  const { name, pwd, new_pwd } = req.body;
   const account = new Account(name, pwd, null, new_pwd);
   await account.edit();
-  return c.json({ message: 'Password updated' });
+  res.json({ message: 'Password updated' });
 });
 
-app.post('/api/account/get', async (c) => {
-  const { user_token, user_id } = await c.req.json();
+app.post('/api/account/get', async (req, res) => {
+  const { user_token, user_id } = req.body;
   const account = new Account(null, null, null, null, user_token, user_id);
   await account.get();
-  return c.json({ message: 'Account details fetched' });
+  res.json({ message: 'Account details fetched' });
 });
 
 //--------------------Message--------------------//
@@ -92,32 +92,32 @@ class Message {
   }
 }
 
-app.post('/api/message/create', async (c) => {
-  const { user_token, msg, ch_id } = await c.req.json();
+app.post('/api/message/create', async (req, res) => {
+  const { user_token, msg, ch_id } = req.body;
   const message = new Message(user_token, msg, ch_id);
   await message.create();
-  return c.json({ message: 'Message created' });
+  res.json({ message: 'Message created' });
 });
 
-app.post('/api/message/delete', async (c) => {
-  const { user_token, msg_id } = await c.req.json();
+app.post('/api/message/delete', async (req, res) => {
+  const { user_token, msg_id } = req.body;
   const message = new Message(user_token, null, null, msg_id);
   await message.delete();
-  return c.json({ message: 'Message deleted' });
+  res.json({ message: 'Message deleted' });
 });
 
-app.post('/api/message/edit', async (c) => {
-  const { user_token, msg_id, new_msg } = await c.req.json();
+app.post('/api/message/edit', async (req, res) => {
+  const { user_token, msg_id, new_msg } = req.body;
   const message = new Message(user_token, null, null, msg_id, new_msg);
   await message.edit();
-  return c.json({ message: 'Message updated' });
+  res.json({ message: 'Message updated' });
 });
 
-app.post('/api/message/get', async (c) => {
-  const { user_token, msg_id } = await c.req.json();
+app.post('/api/message/get', async (req, res) => {
+  const { user_token, msg_id } = req.body;
   const message = new Message(user_token, null, null, msg_id);
   await message.get();
-  return c.json({ message: 'Message details fetched' });
+  res.json({ message: 'Message details fetched' });
 });
 
 //--------------------Server--------------------//
