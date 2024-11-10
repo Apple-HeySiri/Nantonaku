@@ -4,7 +4,7 @@ app.use(express.json());
 
 //--------------------Web--------------------//
 
-app.post('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send('Hello');
 });
 
