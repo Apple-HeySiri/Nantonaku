@@ -1,8 +1,6 @@
 import { Hono } from 'hono';
-import express from 'express';
 
 const app = new Hono();
-const server = express();
 
 //--------------------Web--------------------//
 
@@ -122,12 +120,6 @@ app.post('/api/message/get', async (c) => {
   return c.json({ message: 'Message details fetched' });
 });
 
-//--------------------Server--------------------//
+//--------------------App--------------------//
 
-server.use(express.json());
-
-server.use((req, res) => {
-  return app.fetch(req, res);
-});
-
-server.listen(3000);
+app.fire();
